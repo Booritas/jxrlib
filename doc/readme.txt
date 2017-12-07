@@ -5,17 +5,17 @@ JPEG XR
 -------
 This device porting kit (DPK) supports the JPEG XR still image format, based on
 technology originally developed by Mirosoft under the name HD Photo (formerly
-Windows Media™ Photo). The JPEG XR format is similar, but not identical, to the
-HD Photo/Windows Media™ Photo format.
+Windows MediaÂ™ Photo). The JPEG XR format is similar, but not identical, to the
+HD Photo/Windows MediaÂ™ Photo format.
 
-The JPEG XR format replaces the HD Photo/Windows Media™ Photo format in both
+The JPEG XR format replaces the HD Photo/Windows MediaÂ™ Photo format in both
 Windows 8 and the Windows Image Component (WIC). WIC accompanies the Internet
 Explorer 10 redistributable packages for down-level versions of Windows.
-Some “Windows Media™ Photo” (WMP) naming conventions are still used internally
+Some Â“Windows MediaÂ™ PhotoÂ” (WMP) naming conventions are still used internally
 with this release of the DPK.
 
 JPEG XR files use the .jxr extension.  Applications that support the JPEG XR
-file format should recognize and decode HD Photo/Windows Media™ Photo
+file format should recognize and decode HD Photo/Windows MediaÂ™ Photo
 .hdp/.wdp files, but only offer to create files with the .jxr extension.
 
 

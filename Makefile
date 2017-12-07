@@ -1,30 +1,3 @@
-##//*@@@+++@@@@******************************************************************
-##//
-##// Copyright � Microsoft Corp.
-##// All rights reserved.
-##// 
-##// Redistribution and use in source and binary forms, with or without
-##// modification, are permitted provided that the following conditions are met:
-##// 
-##// � Redistributions of source code must retain the above copyright notice,
-##//   this list of conditions and the following disclaimer.
-##// � Redistributions in binary form must reproduce the above copyright notice,
-##//   this list of conditions and the following disclaimer in the documentation
-##//   and/or other materials provided with the distribution.
-##// 
-##// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-##// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-##// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-##// ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
-##// LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-##// CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-##// SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-##// INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-##// CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-##// ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-##// POSSIBILITY OF SUCH DAMAGE.
-##//
-##//*@@@---@@@@******************************************************************
 ## Makefile for building JPEG XR Porting Kit
 ##
 build: all
@@ -60,15 +33,15 @@ DIR_BUILD=$(CURDIR)/build
 endif
 
 ifndef DIR_INSTALL
-DIR_INSTALL=/usr/lib/jxrlib-$(JXR_VERSION)
+DIR_INSTALL=/usr
 endif
 
 CD=cd
 MK_DIR=mkdir -p
 CFLAGS=-I. -Icommon/include -I$(DIR_SYS) $(ENDIANFLAG) -D__ANSI__ -DDISABLE_PERF_MEASUREMENT -w $(PICFLAG) -O
 
-STATIC_LIBRARIES=$(DIR_BUILD)/libjxrglue.a $(DIR_BUILD)/libjpegxr.a
 SHARED_LIBRARIES=$(DIR_BUILD)/libjxrglue.so $(DIR_BUILD)/libjpegxr.so
+STATIC_LIBRARIES=$(DIR_BUILD)/libjxrglue.a $(DIR_BUILD)/libjpegxr.a
 
 ifneq ($(SHARED),)
 LIBRARIES=$(SHARED_LIBRARIES)
@@ -199,17 +172,17 @@ $(DIR_BUILD)/libjxr.pc: $(DIR_SRC)/libjxr.pc.in
 	@python -c 'import os; d = { "DIR_INSTALL": "$(DIR_INSTALL)", "JXR_VERSION": "$(JXR_VERSION)", "JXR_ENDIAN": "$(ENDIANFLAG)" }; fin = open("$<", "r"); fout = open("$@", "w+"); fout.writelines( [ l % d for l in fin.readlines()])'
 
 install: all $(DIR_BUILD)/libjxr.pc
-	install -d $(DIR_INSTALL)/lib/pkgconfig $(DIR_INSTALL)/bin $(DIR_INSTALL)/include/libjxr/common  $(DIR_INSTALL)/include/libjxr/image/x86 $(DIR_INSTALL)/include/libjxr/glue $(DIR_INSTALL)/include/libjxr/test $(DIR_INSTALL)/share/doc/jxr-$(JXR_VERSION)
+	install -d $(DIR_INSTALL)/lib/pkgconfig $(DIR_INSTALL)/bin $(DIR_INSTALL)/include/jxrlib  $(DIR_INSTALL)/include/jxrlib $(DIR_INSTALL)/include/jxrlib $(DIR_INSTALL)/include $(DIR_INSTALL)/share/doc/jxr-$(JXR_VERSION)
 	install $(LIBRARIES) $(DIR_INSTALL)/lib
 	install -m 644 $(DIR_BUILD)/libjxr.pc $(DIR_INSTALL)/lib/pkgconfig
 	install $(DIR_BUILD)/$(ENCAPP) $(DIR_BUILD)/$(DECAPP) $(DIR_INSTALL)/bin
-	install -m 644 $(DIR_SRC)/common/include/*.h $(DIR_INSTALL)/include/libjxr/common
-	install -m 644 $(DIR_SRC)/image/x86/*.h $(DIR_INSTALL)/include/libjxr/image/x86
-	install -m 644 $(DIR_SRC)/$(DIR_SYS)/*.h $(DIR_INSTALL)/include/libjxr/image
-	install -m 644 $(DIR_SRC)/$(DIR_ENC)/*.h $(DIR_INSTALL)/include/libjxr/image
-	install -m 644 $(DIR_SRC)/$(DIR_DEC)/*.h $(DIR_INSTALL)/include/libjxr/image
-	install -m 644 $(DIR_SRC)/$(DIR_GLUE)/*.h $(DIR_INSTALL)/include/libjxr/glue
-	install -m 644 $(DIR_SRC)/$(DIR_TEST)/*.h $(DIR_INSTALL)/include/libjxr/test
+	install -m 644 $(DIR_SRC)/common/include/*.h $(DIR_INSTALL)/include/jxrlib
+	install -m 644 $(DIR_SRC)/image/x86/*.h $(DIR_INSTALL)/include/jxrlib
+	install -m 644 $(DIR_SRC)/$(DIR_SYS)/*.h $(DIR_INSTALL)/include/jxrlib
+	install -m 644 $(DIR_SRC)/$(DIR_ENC)/*.h $(DIR_INSTALL)/include/jxrlib
+	install -m 644 $(DIR_SRC)/$(DIR_DEC)/*.h $(DIR_INSTALL)/include/jxrlib
+	install -m 644 $(DIR_SRC)/$(DIR_GLUE)/*.h $(DIR_INSTALL)/include/jxrlib
+	install -m 644 $(DIR_SRC)/$(DIR_TEST)/*.h $(DIR_INSTALL)/include/jxrlib
 	install -m 644 doc/* $(DIR_INSTALL)/share/doc/jxr-$(JXR_VERSION)
 
 ##

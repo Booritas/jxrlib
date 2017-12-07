@@ -1,14 +1,14 @@
 //*@@@+++@@@@******************************************************************
 //
-// Copyright © Microsoft Corp.
+// Copyright Â© Microsoft Corp.
 // All rights reserved.
 // 
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
 // 
-// • Redistributions of source code must retain the above copyright notice,
+// Â• Redistributions of source code must retain the above copyright notice,
 //   this list of conditions and the following disclaimer.
-// • Redistributions in binary form must reproduce the above copyright notice,
+// Â• Redistributions in binary form must reproduce the above copyright notice,
 //   this list of conditions and the following disclaimer in the documentation
 //   and/or other materials provided with the distribution.
 // 
@@ -668,9 +668,7 @@ ERR detach_SB(SimpleBitIO* pSB)
 // WinCE ARM and Desktop x86
 #else
 // other platform
-#ifdef _BIG__ENDIAN_
-#define _byteswap_ulong(x)  (x)
-#else // _BIG__ENDIAN_
+#ifndef _BIG__ENDIAN_
 U32 _byteswap_ulong(U32 bits)
 {
     U32 r = (bits & 0xffu) << 24;
